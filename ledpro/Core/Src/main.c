@@ -23,15 +23,21 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+uint8_t aTxBuffer[] = "HelloWorld";
+#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
+#define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
+/* Size of Reception buffer */
+#define RXBUFFERSIZE                      TXBUFFERSIZE
+uint8_t aRxBuffer[RXBUFFERSIZE];
+	__IO ITStatus UartReady = RESET;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
+
 /* USER CODE BEGIN PD */
 /* USER CODE END PD */
 
@@ -95,7 +101,17 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+     if(HAL_UART_Receive_IT(&huart1,(uint8_t *)aRxBuffer,RXBUFFERSIZE) != HAL_OK)
+     {
 
+     }
+     while(UartReady != SET)
+
+    if(HAL_UART_Transmit_IT(&huart1,(uint8_t *)aRxBuffer,TXBUFFERSIZE) !=HAL_OK)
+    {
+    	UartReady = RESET;
+
+    }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
