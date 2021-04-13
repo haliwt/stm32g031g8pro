@@ -24,8 +24,7 @@ void TxDecode(void)
 						 if(cmdType_6 ==BCC()){
 						 	   TheFirstGroupLEDA();
 							   TheSecondGroupLEDB();
-
-						 }
+							}
 					
 					}
 					else{
@@ -84,34 +83,50 @@ static void TheFirstGroupLEDA(void)
 			switch(cmdType_2){
 				
 				case 0:
+					 HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				   HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 					 HAL_GPIO_WritePin(LEDA1_GPIO_Port,LEDA1_Pin, GPIO_PIN_SET);
 				break;
 				
 				case 1: 
+					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				    HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 						HAL_GPIO_WritePin(LEDA2_GPIO_Port,LEDA2_Pin, GPIO_PIN_SET);
 				break;
 				
 				case 2: 
+					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 						HAL_GPIO_WritePin(LEDA3_GPIO_Port,LEDA3_Pin, GPIO_PIN_SET);
 				break;
 				
 				case 3: 
+					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 						HAL_GPIO_WritePin(LEDA4_GPIO_Port,LEDA4_Pin, GPIO_PIN_SET);
 				break;
 				
 				case 4: 
+					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 						HAL_GPIO_WritePin(LEDA5_GPIO_Port,LEDA5_Pin, GPIO_PIN_SET);
 				break;
 				
 				case 5: 
+					   HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 						HAL_GPIO_WritePin(LEDA6_GPIO_Port,LEDA6_Pin, GPIO_PIN_SET);
 				break;
 				
 				case 6: 
+					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 						HAL_GPIO_WritePin(LEDA7_GPIO_Port,LEDA7_Pin, GPIO_PIN_SET);
 				break;
 				
 				case 7: 
+					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
+				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
 						HAL_GPIO_WritePin(LEDA8_GPIO_Port,LEDA8_Pin, GPIO_PIN_SET);
 				break;
 			}
