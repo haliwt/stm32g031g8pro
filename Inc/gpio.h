@@ -47,12 +47,13 @@
 #define LEDA6_Pin 							GPIO_PIN_7
 #define LEDA6_GPIO_Port 				GPIOA
 #define LEDA7_Pin 							GPIO_PIN_0
-
 #define LEDA7_GPIO_Port 				GPIOB
 #define LEDA8_Pin 							GPIO_PIN_1
 #define LEDA8_GPIO_Port 				GPIOB
 #define FAN_Pin 								GPIO_PIN_8
 #define FAN_GPIO_Port 					GPIOA
+
+
 #define LEDBCUT_Pin 						GPIO_PIN_6
 #define LEDBCUT_GPIO_Port 			GPIOC
 #define LEDB1_Pin 							GPIO_PIN_11
@@ -67,8 +68,10 @@
 #define LEDB4_GPIO_Port 				GPIOB
 #define LEDB5_Pin 							GPIO_PIN_5
 #define LEDB5_GPIO_Port 				GPIOB
-#define LEDB6_Pin								GPIO_PIN_6
-#define LEDB6_GPIO_Port 				GPIOB
+
+//#define LEDB6_Pin								GPIO_PIN_6
+//#define LEDB6_GPIO_Port 				GPIOB
+
 #define LEDB7_Pin 							GPIO_PIN_8
 #define LEDB7_GPIO_Port 				GPIOB
 /* USER CODE BEGIN Private defines */
