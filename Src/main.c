@@ -13,6 +13,7 @@
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
+#include "txdecode.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -47,12 +48,12 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-	uint8_t aTxBuffer[8] ;
+	uint8_t aTxBuffer[7] ;
 	#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
-	#define TXBUFFERSIZE                     (COUNTOF(aTxBuffer)) //(COUNTOF(aTxBuffer) - 1)
+	#define TXBUFFERSIZE                    7 //(COUNTOF(aTxBuffer)) //(COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
-#define RXBUFFERSIZE                     TXBUFFERSIZE
-	uint8_t aRxBuffer[RXBUFFERSIZE];
+//#define RXBUFFERSIZE                    7 //TXBUFFERSIZE
+uint8_t aRxBuffer[RXBUFFERSIZE];
 	__IO ITStatus UartReady = RESET;
 /* USER CODE END 0 */
 
@@ -64,7 +65,8 @@ void SystemClock_Config(void);
 int main(void)
 {
   
-  HAL_Init();
+  uint8_t i;
+	HAL_Init();
 
 
   /* Configure the system clock */
@@ -79,22 +81,24 @@ int main(void)
   while (1)
   {
 			/* USER CODE END WHILE */
-			 if (HAL_UART_Receive_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
+			   if (HAL_UART_Receive_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
 				{
 					//Error_Handler();
 				}
-				
-					while (UartReady != SET)
-				{
-
+				else{
+				      
+					  TxDecode();
+						if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
+						{
+							UartReady=RESET;
+						 // Error_Handler();
+						}
+					 // for(i=0;i<8;i++)
+					  //  aRxBuffer[i] =0;
+            
 				}
 				
-				if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, TXBUFFERSIZE) != HAL_OK)
-				{
-					UartReady=RESET;
-				 // Error_Handler();
-				}
-			/* USER CODE BEGIN 3 */
+		
   }
   /* USER CODE END 3 */
 }
