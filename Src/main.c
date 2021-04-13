@@ -47,11 +47,11 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-	uint8_t aTxBuffer[8] = {0x1,0x2} ;
+	uint8_t aTxBuffer[8] ;
 	#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
-	#define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
+	#define TXBUFFERSIZE                     (COUNTOF(aTxBuffer)) //(COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
-#define RXBUFFERSIZE                     1 //TXBUFFERSIZE
+#define RXBUFFERSIZE                     TXBUFFERSIZE
 	uint8_t aRxBuffer[RXBUFFERSIZE];
 	__IO ITStatus UartReady = RESET;
 /* USER CODE END 0 */
