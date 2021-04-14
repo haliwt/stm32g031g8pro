@@ -1,11 +1,10 @@
 /* USER CODE BEGIN Header */
 /***************************************************************************//**
   文件: main.c
-  作者: Zhengyu https://gzwelink.taobao.com
+  Function: singleLed be Hardware test
   版本: V1.0.0
-  时间: 20200401
-	平台:MINI-G030C8T6
-
+  时间: 20210413
+	Hardware IC: stm32g031g8Ux
 *******************************************************************************/
 /* USER CODE END Header */
 
@@ -14,43 +13,15 @@
 #include "usart.h"
 #include "gpio.h"
 #include "txdecode.h"
+#include "singleled.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
 
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-/* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-	uint8_t aTxBuffer[7] ;
+	uint8_t aTxBuffer[3] ;
 	#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
-	#define TXBUFFERSIZE                    7 //(COUNTOF(aTxBuffer)) //(COUNTOF(aTxBuffer) - 1)
+	#define TXBUFFERSIZE                    3 //(COUNTOF(aTxBuffer)) //(COUNTOF(aTxBuffer) - 1)
 /* Size of Reception buffer */
 //#define RXBUFFERSIZE                    7 //TXBUFFERSIZE
 uint8_t aRxBuffer[RXBUFFERSIZE];
@@ -86,12 +57,12 @@ int main(void)
 					//Error_Handler();
 				}
 				else{
-				      
-					  TxDecode();
-						if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
-						{
-							UartReady=RESET;
-						 // Error_Handler();
+
+          SingleLed_Test() ;//TxDecode();
+          if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
+          {
+            UartReady = RESET;
+            // Error_Handler();
 						}
 					 // for(i=0;i<8;i++)
 					  //  aRxBuffer[i] =0;

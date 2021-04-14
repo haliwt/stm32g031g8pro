@@ -33,7 +33,7 @@ extern "C" {
 
 
 
-#define RXBUFFERSIZE          7 //TXBUFFERSIZE
+#define RXBUFFERSIZE          3 //TXBUFFERSIZE
 
 
 extern uint8_t aRxBuffer[RXBUFFERSIZE];
