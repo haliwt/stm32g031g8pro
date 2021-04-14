@@ -3,7 +3,7 @@
 #include "singleled.h"
 #include "usart.h"
 
-
+led ledab;
 uint8_t txdata;
 uint8_t led_by_id;  //A? ?? B ?
 uint8_t led_by_A;   //A
@@ -102,12 +102,12 @@ void CheckRun(void)
 
 		case 1 :  //A group
 		       
-			   TheFirstGroup_SingleLEDA(led_by_A);
+			   TheFirstGroup_SingleLEDA();
 
 		break;
 
 		case 2:   //B group
-               TheSecondGroup_SingleLEDB(led_by_B);
+               TheSecondGroup_SingleLEDB();
 		break;
 
 		default:
