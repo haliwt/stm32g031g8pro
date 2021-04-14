@@ -1,19 +1,25 @@
 #include "txdecode.h"
 #include "gpio.h"
+#include "singleled.h"
+#include "usart.h"
 
 
-
+uint8_t txdata;
+uint8_t led_by_id;  //A? ?? B ?
+uint8_t led_by_A;   //A
+uint8_t led_by_B;  //
 
 static uint8_t BCC(void);
-static void TheFirstGroupLEDA(void);
-static void TheSecondGroupLEDB(void);
+
 
 
 
 void TxDecode(void)
 {
-  uint8_t cmdType_0 =aRxBuffer[0] ; //command order 0
-	uint8_t cmdType_1 =aRxBuffer[1] ; //command order 1
+    uint8_t cmdType_0   = aRxBuffer[0] ; //command order 0
+	uint8_t cmdType_1 =   aRxBuffer[1] ; //command order 1
+	uint8_t cmdType_2 =  aRxBuffer[2] ;  //group A led
+	uint8_t cmdType_3 =  aRxBuffer[3];   //group B led
 	uint8_t cmdType_6 =aRxBuffer[6] ; //check sum codes   
 	  
 	 switch(cmdType_0){
@@ -21,18 +27,35 @@ void TxDecode(void)
 		  case 0x42:
 				
 			    if(cmdType_1 == 0x4c){
-						 if(cmdType_6 ==BCC()){
-						 	   TheFirstGroupLEDA();
-							   TheSecondGroupLEDB();
+						if(cmdType_6 ==BCC()){
+						 	   
+							TurnOff_TheFirstLedA();	
+							TurnOff_TheSecondLedB();
+							
+							led_by_id = cmdType_0;
+							txdata =led_by_id;
+							HAL_UART_Transmit(&huart1,&txdata, 1, 10);
+							if(led_by_id == 0){
+							   led_by_id = 2;
+							   led_by_B = cmdType_3;
+
 							}
-					
-					}
+							else{
+								led_by_id =1;
+                                led_by_A = cmdType_2;
+                            }
+							  
+						}
+				}
 					else{
 					
 					  return ;
 					}
 				
 			
+			break;
+			default:
+				 
 			break;
 		
 		
@@ -63,129 +86,41 @@ static uint8_t BCC(void)
 }
 /*************************************************************************
  	*
-	*Function Name: void TheFirstGroupLEDA(void)
-	*Function : Turn On LEDAxx LED
+	*Function Name: void CheckRun(void)
+	*Function : 
 	*Input Ref: NO
 	*Output Ref:No
 	*
 ******************************************************************************/
-static void TheFirstGroupLEDA(void)
+void CheckRun(void)
 {
-		uint8_t cmdType_2 =aRxBuffer[2] ; //the first group   LEDAxx LED
-	
-	  if(cmdType_2 > 7)
-		{
-			 HAL_GPIO_WritePin(LEDA1_GPIO_Port,LEDA1_Pin|LEDA2_Pin|LEDA3_Pin|LEDA4_Pin|LEDA5_Pin|LEDA6_Pin,GPIO_PIN_RESET);
-			 HAL_GPIO_WritePin(LEDA7_GPIO_Port,LEDA7_Pin|LEDA8_Pin,GPIO_PIN_RESET);
-		
-		}
-		else{
-			switch(cmdType_2){
-				
-				case 0:
-					 HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				   HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-					 HAL_GPIO_WritePin(LEDA1_GPIO_Port,LEDA1_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 1: 
-					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				    HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-						HAL_GPIO_WritePin(LEDA2_GPIO_Port,LEDA2_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 2: 
-					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-						HAL_GPIO_WritePin(LEDA3_GPIO_Port,LEDA3_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 3: 
-					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-						HAL_GPIO_WritePin(LEDA4_GPIO_Port,LEDA4_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 4: 
-					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-						HAL_GPIO_WritePin(LEDA5_GPIO_Port,LEDA5_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 5: 
-					   HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-						HAL_GPIO_WritePin(LEDA6_GPIO_Port,LEDA6_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 6: 
-					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-						HAL_GPIO_WritePin(LEDA7_GPIO_Port,LEDA7_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 7: 
-					  HAL_GPIO_WritePin(LEDAPWM_GPIO_Port,LEDAPWM_Pin, GPIO_PIN_SET);
-				      HAL_GPIO_WritePin(LEDACUT_GPIO_Port ,LEDACUT_Pin, GPIO_PIN_SET);
-						HAL_GPIO_WritePin(LEDA8_GPIO_Port,LEDA8_Pin, GPIO_PIN_SET);
-				break;
-			}
+	switch(led_by_id){
+
+		case 0:
+
+		break;
+
+		case 1 :  //A group
+		       
+			   TheFirstGroup_SingleLEDA(led_by_A);
+
+		break;
+
+		case 2:   //B group
+               TheSecondGroup_SingleLEDB(led_by_B);
+		break;
+
+		default:
+
+		break;
 	}
 
 }
-
 /*************************************************************************
  	*
-	*Function Name: void TheSecondGroupLEDB(void)
-	*Function : Turn On LEDBxx LED the second group LED on
+	*Function Name: void CheckRun(void)
+	*Function : 
 	*Input Ref: NO
 	*Output Ref:No
 	*
 ******************************************************************************/
-static void TheSecondGroupLEDB(void)
-{
-		uint8_t cmdType_3 =aRxBuffer[3] ; //the first group   LEDAxx LED
-	
-	  if(cmdType_3 > 7){
-		   HAL_GPIO_WritePin(LEDB1_GPIO_Port,LEDB1_Pin|LEDB2_Pin|LEDB3_Pin, GPIO_PIN_RESET);
-			 HAL_GPIO_WritePin(LEDB4_GPIO_Port,LEDB4_Pin|LEDB5_Pin|LEDB7_Pin, GPIO_PIN_RESET);
-		   HAL_GPIO_WritePin(LEDB8_GPIO_Port,LEDB8_Pin, GPIO_PIN_RESET);
-		}
-	  else{
-	  switch(cmdType_3){
-		
-			  case 0:
-					 HAL_GPIO_WritePin(LEDB1_GPIO_Port,LEDB1_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 1:
-					 HAL_GPIO_WritePin(LEDB2_GPIO_Port,LEDB2_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 2:
-					 HAL_GPIO_WritePin(LEDB3_GPIO_Port,LEDB3_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 3:
-					 HAL_GPIO_WritePin(LEDB4_GPIO_Port,LEDB4_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 4:
-					 HAL_GPIO_WritePin(LEDB5_GPIO_Port,LEDB5_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 5:
-					// HAL_GPIO_WritePin(LEDB6_GPIO_Port,LEDB6_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 6:
-					 HAL_GPIO_WritePin(LEDB7_GPIO_Port,LEDB7_Pin, GPIO_PIN_SET);
-				break;
-				
-				case 7:
-					 HAL_GPIO_WritePin(LEDB8_GPIO_Port,LEDB8_Pin, GPIO_PIN_SET);
-				break;
-		
-			}
-	  }
-}

@@ -69,6 +69,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : LEDACUT_Pin LEDAPWM_Pin LEDA2_Pin LEDA3_Pin
                            LEDA4_Pin LEDA5_Pin LEDA6_Pin FAN_Pin
                            LEDB1_Pin LEDB2_Pin LEDB3_Pin */
+													 
   GPIO_InitStruct.Pin = LEDACUT_Pin|LEDAPWM_Pin|LEDA2_Pin|LEDA3_Pin
                           |LEDA4_Pin|LEDA5_Pin|LEDA6_Pin|FAN_Pin
                           |LEDB1_Pin|LEDB2_Pin|LEDB3_Pin;

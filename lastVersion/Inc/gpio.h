@@ -29,37 +29,38 @@
 
 /* Private defines -----------------------------------------------------------*/
 //the first group LED 
-#define LEDACUT_Pin 				  GPIO_PIN_0   //PA0
-#define LEDACUT_GPIO_Port 		GPIOA
+#define LEDACUT_Pin 						GPIO_PIN_0   //PA0
+#define LEDACUT_GPIO_Port 			GPIOA
 
-#define LEDAPWM_Pin 				GPIO_PIN_1   //PA1
+#define LEDAPWM_Pin 						GPIO_PIN_1 //PA1
 #define LEDAPWM_GPIO_Port 			GPIOA
 
-#define LEDA1_Pin 					GPIO_PIN_2  //PA2
-#define LEDA1_GPIO_Port 			GPIOA
+#define LEDA1_Pin 							GPIO_PIN_2  //PA2
+#define LEDA1_GPIO_Port 				GPIOA
 
-#define LEDA2_Pin 					GPIO_PIN_3    //PA3
-#define LEDA2_GPIO_Port 			GPIOA
+#define LEDA2_Pin 							GPIO_PIN_3    //PA3
+#define LEDA2_GPIO_Port 				GPIOA
 
-#define LEDA3_Pin 					GPIO_PIN_4   //PA4
-#define LEDA3_GPIO_Port 			GPIOA
+#define LEDA3_Pin 							GPIO_PIN_4   //PA4
+#define LEDA3_GPIO_Port 				GPIOA
 
-#define LEDA4_Pin 					GPIO_PIN_5  //PA5
-#define LEDA4_GPIO_Port 			GPIOA
+#define LEDA4_Pin 							GPIO_PIN_5  //PA5
+#define LEDA4_GPIO_Port 				GPIOA
 
-#define LEDA5_Pin 					GPIO_PIN_6   //PA6
-#define LEDA5_GPIO_Port 			GPIOA
+#define LEDA5_Pin 							GPIO_PIN_6   //PA6
+#define LEDA5_GPIO_Port 				GPIOA
 
-#define LEDA6_Pin 					GPIO_PIN_7   //PA7
-#define LEDA6_GPIO_Port 			GPIOA
+#define LEDA6_Pin 							GPIO_PIN_7   //PA7
+#define LEDA6_GPIO_Port 				GPIOA
 
-#define LEDA7_Pin 					GPIO_PIN_0  //PB0
-#define LEDA7_GPIO_Port 			GPIOB
+#define LEDA7_Pin 							GPIO_PIN_0  //PB0
+#define LEDA7_GPIO_Port 				GPIOB
 
-#define LEDA8_Pin 					GPIO_PIN_1  //PB1
-#define LEDA8_GPIO_Port 			GPIOB
+#define LEDA8_Pin 							GPIO_PIN_1  //PB1
+#define LEDA8_GPIO_Port 				GPIOB
 
-
+#define FAN_Pin 								GPIO_PIN_8  //PA8
+#define FAN_GPIO_Port 					GPIOA
 
 //The second group GPIO define
 #define LEDBCUT_Pin 						GPIO_PIN_6   //PC6
@@ -91,10 +92,6 @@
 
 #define LEDB8_Pin   						GPIO_PIN_14 //PC14
 #define LEDB8_GPIO_Port 				GPIOC
-
-//Fan define 
-#define FAN_Pin 								GPIO_PIN_8  //PA8
-#define FAN_GPIO_Port 					GPIOA
 /* USER CODE BEGIN Private defines */
 
 void MX_GPIO_Init(void);

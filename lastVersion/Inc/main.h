@@ -30,17 +30,10 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32g0xx_hal.h"
 
-#define TEST_MODE  1U
 
-#ifdef TEST_MODE
 
-#define RXBUFFERSIZE          4 //TXBUFFERSIZE
 
-#else 
-
-#define RXBUFFERSIZE          7 //TXBUFFERSIZE
-
-#endif 
+#define RXBUFFERSIZE          3 //TXBUFFERSIZE
 
 
 extern uint8_t aRxBuffer[RXBUFFERSIZE];
