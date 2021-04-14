@@ -30,7 +30,7 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32g0xx_hal.h"
 
-#define TEST_MODE  1U
+//#define TEST_MODE  1U
 
 #ifdef TEST_MODE
 

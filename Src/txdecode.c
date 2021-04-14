@@ -16,47 +16,41 @@ static uint8_t BCC(void);
 
 void TxDecode(void)
 {
-    uint8_t cmdType_0   = aRxBuffer[0] ; //command order 0
-	uint8_t cmdType_1 =   aRxBuffer[1] ; //command order 1
+    uint8_t cmdType_0 =  aRxBuffer[0] ; //command order 0
+	uint8_t cmdType_1 =  aRxBuffer[1] ; //command order 1
 	uint8_t cmdType_2 =  aRxBuffer[2] ;  //group A led
 	uint8_t cmdType_3 =  aRxBuffer[3];   //group B led
-	uint8_t cmdType_6 =aRxBuffer[6] ; //check sum codes   
-	  
-	 switch(cmdType_0){
-		
-		  case 0x42:
-				
-			    if(cmdType_1 == 0x4c){
-						if(cmdType_6 ==BCC()){
-						 	   
-							TurnOff_TheFirstLedA();	
-							TurnOff_TheSecondLedB();
-							
-							led_by_id = cmdType_0;
-							txdata =led_by_id;
-							HAL_UART_Transmit(&huart1,&txdata, 1, 10);
-							if(led_by_id == 0){
-							   led_by_id = 2;
-							   led_by_B = cmdType_3;
+	uint8_t cmdType_4 =  aRxBuffer[4];		   //group B led
+	uint8_t cmdType_5 =  aRxBuffer[5];				   //group B led
+	uint8_t cmdType_6 =  aRxBuffer[6] ; //check sum codes
 
-							}
-							else{
-								led_by_id =1;
-                                led_by_A = cmdType_2;
-                            }
-							  
-						}
-				}
-					else{
-					
-					  return ;
-					}
-				
-			
-			break;
-			default:
-				 
-			break;
+	uint8_t tembyte = 0xAA ^ cmdType_2 ^ cmdType_3 ^ cmdType_4 ^ cmdType_5;
+
+	switch (cmdType_0)
+	{
+
+	case 0x42:
+
+		if (cmdType_1 == 0x4c)
+		{
+			if (cmdType_6 == tembyte)
+			{
+				ledab.led_by_a = cmdType_2; //group A led
+				ledab.led_by_b = cmdType_3; //group B led
+				TheFirstGroup_SingleLEDA();
+				TheSecondGroup_SingleLEDB();
+			}
+		}
+		else
+		{
+
+			return;
+		}
+
+		break;
+	default:
+
+		break;
 		
 		
 		
