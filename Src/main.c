@@ -14,6 +14,7 @@
 #include "gpio.h"
 #include "txdecode.h"
 #include "singleled.h"
+#include "pwm.h"
 
 
 void SystemClock_Config(void);
@@ -47,7 +48,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-
+	MX_TIM2_Init();
+	MX_TIM1_Init();
   /* USER CODE BEGIN WHILE */
   while (1)
   {
@@ -57,15 +59,24 @@ int main(void)
 		  //Error_Handler();
 		}
 		else{
+			
+			if(HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2) != HAL_OK)
+			{
+			
+			}
+			if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2)!= HAL_OK){
+			
+			
+			}
 
-		 SingleLed_Test() ; //TestMode
-		//TxDecode();
+		 //SingleLed_Test() ; //TestMode
+		
 		//if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
-		{
+		//{
 			//UartReady = RESET;
 			
 		// Error_Handler();
-		}
+		//}
 		//CheckRun();
 		}
 				
