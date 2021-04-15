@@ -60,9 +60,9 @@ int main(void)
 
 		 SingleLed_Test() ; //TestMode
 		//TxDecode();
-		if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
+		//if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
 		{
-			UartReady = RESET;
+			//UartReady = RESET;
 			
 		// Error_Handler();
 		}

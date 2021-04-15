@@ -1,13 +1,14 @@
 #include "singleled.h"
 #include "gpio.h"
+#include "usart.h"
 
 
-
+static uint8_t BCC_CHECK(void);
 
 
 void SingleLed_Test(void)
 {
-    
+    uint8_t temp;
 	uint8_t cmdType_0 = aRxBuffer[0]; //command order 1
 	uint8_t cmdType_1 = aRxBuffer[1]; //command order 1
 	ledab.led_by_a =    aRxBuffer[2];	  //command order 0
@@ -15,9 +16,11 @@ void SingleLed_Test(void)
 	uint8_t cmdType_4 = aRxBuffer[4]; //command order 1
 	uint8_t cmdType_5 = aRxBuffer[5]; //check sum codes
 	uint8_t cmdType_6 = aRxBuffer[6]; //command order 1
+	temp = BCC_CHECK();
+	HAL_UART_Transmit(&huart1,&temp,1, 2);
 	if(cmdType_0 == 0x42){
 		if(cmdType_1 == 0x4c){
-			if(cmdType_6 == 0xAA){
+			if(cmdType_6 == temp){
 				
 				TheFirstGroup_SingleLEDA();
 				TheSecondGroup_SingleLEDB();
@@ -320,4 +323,24 @@ void TurnOff_TheSecondLedB(void)
 		 HAL_GPIO_WritePin(LEDB1_GPIO_Port, LEDB1_Pin | LEDB2_Pin | LEDB3_Pin, GPIO_PIN_RESET);
 		 HAL_GPIO_WritePin(LEDB4_GPIO_Port, LEDB4_Pin | LEDB5_Pin | LEDB7_Pin, GPIO_PIN_RESET);
 		 HAL_GPIO_WritePin(LEDB8_GPIO_Port, LEDB8_Pin, GPIO_PIN_RESET);
+}
+/*************************************************************************
+ 	*
+	*Function Name:
+	*Function : 
+	*Input Ref: NO
+	*Output Ref:No
+	*
+******************************************************************************/
+static uint8_t BCC_CHECK(void)
+{
+   uint8_t i;
+	 
+	 uint8_t tembyte =0xAA ^ aRxBuffer[2];
+	
+    for (i = 3; i <6; i++) {
+        tembyte = tembyte ^ aRxBuffer[i];
+    }
+    return tembyte;
+
 }
