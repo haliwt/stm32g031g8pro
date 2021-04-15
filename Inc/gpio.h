@@ -32,7 +32,7 @@
 #define LEDACUT_Pin 				  GPIO_PIN_0   //PA0
 #define LEDACUT_GPIO_Port 		GPIOA
 
-#define LEDAPWM_Pin 				GPIO_PIN_1   //PA1
+#define LEDAPWM_Pin 				GPIO_PIN_1   //PA1 -TIM2_CH2
 #define LEDAPWM_GPIO_Port 			GPIOA
 
 #define LEDA1_Pin 					GPIO_PIN_2  //PA2
@@ -74,7 +74,7 @@
 #define LEDB3_Pin 							GPIO_PIN_15  //PA15
 #define LEDB3_GPIO_Port 				GPIOA
 
-#define LEDBPWM_Pin 						GPIO_PIN_3   //PB3
+#define LEDBPWM_Pin 						GPIO_PIN_3   //PB3 --TIM1-CH2
 #define LEDBPWM_GPIO_Port 			GPIOB
 
 #define LEDB4_Pin 							GPIO_PIN_4  //PB4

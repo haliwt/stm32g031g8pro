@@ -60,16 +60,16 @@ int main(void)
 		}
 		else{
 			
-			if(HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2) != HAL_OK)
-			{
-			
-			}
-			if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2)!= HAL_OK){
-			
-			
-			}
+//			if(HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2) != HAL_OK)
+//			{
+//			
+//			}
+//			if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2)!= HAL_OK){
+//			
+//			
+//			}
 
-		 //SingleLed_Test() ; //TestMode
+		    SingleLed_Test() ; //TestMode
 		
 		//if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
 		//{

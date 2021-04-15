@@ -84,9 +84,9 @@ void MX_TIM2_Init(void)
   TIM_OC_InitTypeDef sConfigOC = {0};
 
   htim2.Instance =TIM2 ; //TIM3;
-  htim2.Init.Prescaler = 4-1;
+  htim2.Init.Prescaler = 4-1; //ck_cnt = 16MHz /(PSC + 1)
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 100 -1 ;
+  htim2.Init.Period = 100 -1 ; //Fpwm = ck_cnt / Period = 
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
