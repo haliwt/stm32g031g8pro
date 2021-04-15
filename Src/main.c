@@ -12,7 +12,6 @@
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
-#include "txdecode.h"
 #include "singleled.h"
 #include "pwm.h"
 
@@ -37,7 +36,7 @@ uint8_t aRxBuffer[RXBUFFERSIZE];
 int main(void)
 {
   
-  uint8_t i;
+  
 	HAL_Init();
 
 

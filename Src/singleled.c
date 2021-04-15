@@ -3,6 +3,7 @@
 #include "usart.h"
 #include "pwm.h"
 
+led ledab;
 static uint8_t BCC_CHECK(void);
 
 
@@ -13,7 +14,7 @@ void SingleLed_Test(void)
 	uint8_t cmdType_1 = aRxBuffer[1]; //command order 1
 	ledab.led_by_a =    aRxBuffer[2];	  //command order 0
 	ledab.led_by_b =    aRxBuffer[3];	  //command order 1
-	uint8_t cmdType_4 = aRxBuffer[4]; //command order 1
+	//uint8_t cmdType_4 = aRxBuffer[4]; //command order 1
 	uint8_t cmdType_5 = aRxBuffer[5]; //check sum codes
 	uint8_t cmdType_6 = aRxBuffer[6]; //command order 1
 	temp = BCC_CHECK();
@@ -345,3 +346,5 @@ static uint8_t BCC_CHECK(void)
     return tembyte;
 
 }
+
+
