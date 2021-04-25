@@ -97,7 +97,7 @@
 #define FAN_GPIO_Port 					GPIOA
 /* USER CODE BEGIN Private defines */
 
-void MX_GPIO_Init(void);
+void mainMX_GPIO_Init(void);
 
 
 

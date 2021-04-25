@@ -14,7 +14,8 @@
 #include "gpio.h"
 #include "singleled.h"
 #include "pwm.h"
-
+#include "mainboard.h"
+#include "mainled.h"
 
 void SystemClock_Config(void);
 
@@ -45,43 +46,33 @@ int main(void)
 
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_USART1_UART_Init();
+    mainMX_GPIO_Init();
+  
+    MX_USART1_UART_Init();
 	MX_TIM2_Init();
 	MX_TIM1_Init();
+	HAL_UART_Abort(&huart1);
+	HAL_UART_Receive_IT(&huart1,aRxBuffer,1);
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		/* USER CODE END WHILE */
-		if (HAL_UART_Receive_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
-		{
-		  //Error_Handler();
-		}
-		else{
-			
-//			if(HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2) != HAL_OK)
-//			{
-//			
-//			}
-//			if(HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2)!= HAL_OK){
-//			
-//			
-//			}
-
-		    SingleLed_Test() ; //TestMode
 		
-		//if (HAL_UART_Transmit_IT(&huart1, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
-		//{
-			//UartReady = RESET;
-			
-		// Error_Handler();
-		//}
-		//CheckRun();
-		}
+	   
+        DecodeTestCase();
+	 
+//        {
+//            ledab.left_side = ReadLR_Control();
+//			
+//			 SingleLed_Test() ; //TestMode
+
+//			 HAL_UART_Transmit(&huart1,(uint8_t *)aRxBuffer,8, 10);
+//		 
+//		}
+		
 				
 		
   }
-  /* USER CODE END 3 */
+  
 }
 
 /**
